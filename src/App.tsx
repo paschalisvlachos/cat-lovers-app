@@ -1,26 +1,33 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route, Link } from 'react-router-dom';
+import CatGallery from './components/CatGallery';
+import CatBreeds from './components/CatBreeds';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <div className="container">
+          <Link className="navbar-brand" to="/">Cat Lovers</Link>
+          <div className="collapse navbar-collapse">
+            <ul className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <Link className="nav-link" to="/">Gallery</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/breeds">Cat Breeds</Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<CatGallery />} />
+        <Route path="/breeds" element={<CatBreeds />} />
+      </Routes>
     </div>
   );
-}
+};
 
 export default App;

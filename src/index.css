@@ -11,3 +11,26 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.cat-img {
+  height: 250px; 
+  width: 100%;  
+  object-fit: cover; 
+  border-radius: 8px; 
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer; 
+  transition: transform 0.2s ease; 
+}
+
+.cat-img:hover {
+  transform: scale(1.05); 
+}
+
+.breed-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: gold; 
+  font-size: 1.5rem; 
+  z-index: 10;
+}
