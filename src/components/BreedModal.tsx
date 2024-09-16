@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap'; // Import React Bootstrap components
 import { Cat, Breed } from '../interfaces/CatInterfaces';
+import '../index.css'
 
 interface BreedModalProps {
   selectedBreed: Breed | null;
@@ -23,7 +24,7 @@ const BreedModal: React.FC<BreedModalProps> = ({ selectedBreed, breedImages, onC
             <div key={cat.id} className="col-md-4 mb-4">
               <img
                 src={cat.url}
-                className="img-fluid"
+                className="cat-img img-fluid"
                 alt={selectedBreed.name}
                 style={{ cursor: 'pointer' }}
                 onClick={() => handleCatClick(cat)}
