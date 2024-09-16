@@ -52,7 +52,7 @@ const CatGallery: React.FC = () => {
 
   return (
     <div className="container">
-      <h1 className="my-4">Cat Breeds</h1>
+      <h1 className="my-4">Cat Gallery</h1>
 
       {error && (
         <div className="alert alert-danger" role="alert">
