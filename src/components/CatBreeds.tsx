@@ -1,10 +1,8 @@
-// src/components/CatBreeds.tsx
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate, useLocation } from 'react-router-dom'; // For navigation and location
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Breed, Cat } from '../interfaces/CatInterfaces';
-import BreedModal from './BreedModal'; // Import the new BreedModal component
+import BreedModal from './BreedModal';
 
 const CatBreeds: React.FC = () => {
   const [breeds, setBreeds] = useState<Breed[]>([]);
@@ -12,7 +10,7 @@ const CatBreeds: React.FC = () => {
   const [selectedBreed, setSelectedBreed] = useState<Breed | null>(null);
   const [breedImages, setBreedImages] = useState<Cat[]>([]);
   const navigate = useNavigate();
-  const location = useLocation(); // To get the current location
+  const location = useLocation();
 
   const fetchBreeds = async () => {
     try {
@@ -77,7 +75,6 @@ const CatBreeds: React.FC = () => {
         ))}
       </div>
 
-      {/* Use the new BreedModal component */}
       <BreedModal
         selectedBreed={selectedBreed}
         breedImages={breedImages}

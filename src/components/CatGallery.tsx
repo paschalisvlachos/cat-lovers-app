@@ -1,17 +1,22 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../index.css'; 
-import { Cat } from '../interfaces/CatInterfaces'; 
-import CatModal from './CatModal'; 
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Cat } from '../interfaces/CatInterfaces';
 
-const CatGallery: React.FC = () => {
+interface CatGalleryProps {
+  addToFavorites: (cat: Cat) => void;
+  removeFromFavorites: (cat: Cat) => void;
+  isFavorite: (catId: string) => boolean;
+}
+
+const CatGallery: React.FC<CatGalleryProps> = ({ addToFavorites, removeFromFavorites, isFavorite }) => {
   const [cats, setCats] = useState<Cat[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [selectedCat, setSelectedCat] = useState<Cat | null>(null); // State for the selected cat
-  const initialFetchRef = useRef<boolean>(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  // Function to load cats from the API
+  // Fetch cats from API
   const fetchCats = async () => {
     try {
       setLoading(true);
@@ -24,35 +29,25 @@ const CatGallery: React.FC = () => {
           },
         }
       );
-
       setCats((prevCats) => [...prevCats, ...response.data]);
     } catch (error) {
-      setError('Failed to load cat images. Please try again.');
+      setError('Failed to load cat images.');
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    if (!initialFetchRef.current) {
-      fetchCats();
-      initialFetchRef.current = true;
-    }
+    fetchCats();
   }, []);
 
-  // Function to handle when a cat is clicked and the modal should open
   const handleCatClick = (cat: Cat) => {
-    setSelectedCat(cat); // Set the clicked cat as the selected one
-  };
-
-  // Function to close the modal
-  const handleCloseModal = () => {
-    setSelectedCat(null); // Reset the selected cat to close the modal
+    navigate(`/cat/${cat.id}`, { state: { backgroundLocation: location } }); // Open modal over gallery
   };
 
   return (
     <div className="container">
-      <h1 className="my-4">Cat Gallery</h1>
+      <h1 className="my-4">Gallery</h1>
 
       {error && (
         <div className="alert alert-danger" role="alert">
@@ -63,27 +58,16 @@ const CatGallery: React.FC = () => {
       <div className="row">
         {cats.map((cat) => (
           <div key={cat.id} className="col-md-4 mb-4">
-            <div className="card" onClick={() => handleCatClick(cat)} style={{ position: 'relative' }}>
+            <div className="card" onClick={() => handleCatClick(cat)} style={{ cursor: 'pointer' }}>
               <img src={cat.url} className="cat-img card-img-top" alt="Cute cat" />
-              {cat.breeds && cat.breeds.length > 0 && (
-                <span className="breed-icon">★</span>
-              )
-              }
             </div>
           </div>
         ))}
       </div>
 
-      <button
-        className="btn btn-primary my-4"
-        onClick={fetchCats}
-        disabled={loading}
-      >
+      <button className="btn btn-primary my-4" onClick={fetchCats} disabled={loading}>
         {loading ? 'Loading...' : 'Load More Cats'}
       </button>
-
-      {/* Render the modal component */}
-      <CatModal selectedCat={selectedCat} onClose={handleCloseModal} />
     </div>
   );
 };
