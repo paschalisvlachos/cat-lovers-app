@@ -1,10 +1,6 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Cat } from '../interfaces/CatInterfaces';
-
-interface FavoritesProps {
-  favorites: Cat[];
-}
+import { Cat, FavoritesProps } from '../interfaces/CatInterfaces';
 
 const Favorites: React.FC<FavoritesProps> = ({ favorites }) => {
   const navigate = useNavigate();

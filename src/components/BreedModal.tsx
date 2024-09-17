@@ -1,14 +1,7 @@
 import React from 'react';
-import { Modal, Button } from 'react-bootstrap'; // Import React Bootstrap components
-import { Cat, Breed } from '../interfaces/CatInterfaces';
+import { Modal, Button } from 'react-bootstrap';
+import { BreedModalProps } from '../interfaces/CatInterfaces';
 import '../index.css'
-
-interface BreedModalProps {
-  selectedBreed: Breed | null;
-  breedImages: Cat[];
-  onClose: () => void;
-  handleCatClick: (cat: Cat) => void;
-}
 
 const BreedModal: React.FC<BreedModalProps> = ({ selectedBreed, breedImages, onClose, handleCatClick }) => {
   if (!selectedBreed) return null;

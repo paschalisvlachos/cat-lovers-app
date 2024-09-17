@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Cat } from '../interfaces/CatInterfaces';
-
-interface CatGalleryProps {
-  addToFavorites: (cat: Cat) => void;
-  removeFromFavorites: (cat: Cat) => void;
-  isFavorite: (catId: string) => boolean;
-}
+import { Cat, CatGalleryProps } from '../interfaces/CatInterfaces';
 
 const CatGallery: React.FC<CatGalleryProps> = ({ addToFavorites, removeFromFavorites, isFavorite }) => {
   const [cats, setCats] = useState<Cat[]>([]);

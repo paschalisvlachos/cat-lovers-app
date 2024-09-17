@@ -2,14 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Modal, Button } from 'react-bootstrap';
-import { Cat } from '../interfaces/CatInterfaces';
-
-interface CatModalProps {
-  onClose: () => void;
-  addToFavorites: (cat: Cat) => void;
-  removeFromFavorites: (cat: Cat) => void;
-  isFavorite: (catId: string) => boolean;
-}
+import { Cat, CatModalProps } from '../interfaces/CatInterfaces';
 
 const CatModal: React.FC<CatModalProps> = ({ onClose, addToFavorites, removeFromFavorites, isFavorite }) => {
   const { catId } = useParams<{ catId: string }>();
