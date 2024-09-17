@@ -1,3 +1,7 @@
+# ΠΛΗΡΟΦΟΡΙΕΣ
+
+Επειδή δεν έχουν όλες οι γατες breed info, έβαλα ένα αστέρι πάνω σε αυτές που έχουν.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

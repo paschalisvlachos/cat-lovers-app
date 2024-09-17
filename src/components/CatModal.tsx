@@ -9,6 +9,7 @@ const CatModal: React.FC<CatModalProps> = ({ onClose, addToFavorites, removeFrom
   const [cat, setCat] = useState<Cat | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [copySuccess, setCopySuccess] = useState<string | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,6 +39,14 @@ const CatModal: React.FC<CatModalProps> = ({ onClose, addToFavorites, removeFrom
     navigate('/');
   };
 
+  const handleCopyURL = () => {
+    const currentURL = window.location.href.replace('/cat/', '/copycat/');
+    navigator.clipboard.writeText(currentURL).then(() => {
+      setCopySuccess('URL copied to clipboard with /copycat/ path!');
+      setTimeout(() => setCopySuccess(null), 2000);
+    });
+  };
+  
   return (
     <Modal show={!!cat} onHide={handleClose} size="lg" centered>
       <Modal.Header closeButton>
@@ -67,6 +76,12 @@ const CatModal: React.FC<CatModalProps> = ({ onClose, addToFavorites, removeFrom
               >
                 {isFavorite(cat.id) ? 'Remove from Favorites' : 'Add to Favorites'}
               </Button>
+            </div>
+            <div>
+              <Button variant="secondary" onClick={handleCopyURL}>
+                Copy URL
+              </Button>
+              {copySuccess && <div className="text-success mt-2">{copySuccess}</div>}
             </div>
           </>
         ) : (

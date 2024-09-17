@@ -1,12 +1,11 @@
-// src/App.tsx
-
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import CatGallery from './components/CatGallery';
 import CatBreeds from './components/CatBreeds';
 import Favorites from './components/CatFavorites';
 import CatModal from './components/CatModal';
-import Navigation from './components/Navigation'; // Import Navigation component
+import CopyCatDetails from './components/CopyCatDetails';
+import Navigation from './components/Navigation';
 import { Cat } from './interfaces/CatInterfaces';
 
 const App: React.FC = () => {
@@ -42,7 +41,6 @@ const App: React.FC = () => {
 
   return (
     <div>
-      {/* Navigation Menu */}
       <Navigation />
 
       <Routes location={backgroundLocation}>
@@ -58,6 +56,7 @@ const App: React.FC = () => {
         />
         <Route path="/breeds" element={<CatBreeds />} />
         <Route path="/favorites" element={<Favorites favorites={favorites} />} />
+        <Route path="/copycat/:catId" element={<CopyCatDetails />} />
       </Routes>
 
       {location.state?.backgroundLocation && (
