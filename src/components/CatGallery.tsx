@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Cat, CatGalleryProps } from '../interfaces/CatInterfaces';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+import '../index.css'
 
 const CatGallery: React.FC<CatGalleryProps> = ({ addToFavorites, removeFromFavorites, isFavorite }) => {
   const [cats, setCats] = useState<Cat[]>([]);
@@ -10,7 +13,6 @@ const CatGallery: React.FC<CatGalleryProps> = ({ addToFavorites, removeFromFavor
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Fetch cats from API
   const fetchCats = async () => {
     try {
       setLoading(true);
@@ -53,7 +55,13 @@ const CatGallery: React.FC<CatGalleryProps> = ({ addToFavorites, removeFromFavor
         {cats.map((cat) => (
           <div key={cat.id} className="col-md-4 mb-4">
             <div className="card" onClick={() => handleCatClick(cat)} style={{ cursor: 'pointer' }}>
-              <img src={cat.url} className="cat-img card-img-top" alt="Cute cat" />
+              <img src={cat.url} className="cat-img card-img-top" alt="" />
+            
+              {cat.breeds && cat.breeds.length > 0 && (
+                <div className="star-icon">
+                  <FontAwesomeIcon icon={faStar} size="2x" />
+                </div>
+              )}
             </div>
           </div>
         ))}
