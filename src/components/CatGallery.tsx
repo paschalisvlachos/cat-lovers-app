@@ -55,7 +55,7 @@ const CatGallery: React.FC<CatGalleryProps> = ({ addToFavorites, removeFromFavor
         {cats.map((cat) => (
           <div key={cat.id} className="col-md-4 mb-4">
             <div className="card" onClick={() => handleCatClick(cat)} style={{ cursor: 'pointer' }}>
-              <img src={cat.url} className="cat-img card-img-top" alt="" />
+            <img src={cat.url} className="cat-img card-img-top" alt={`Cat ${cat.id}`} />
             
               {cat.breeds && cat.breeds.length > 0 && (
                 <div className="star-icon">
